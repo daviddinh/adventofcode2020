@@ -1,0 +1,5 @@
+const fs = require("fs")
+let inputText = fs.readFileSync("./1a-input.txt", "utf-8")
+let input = inputText.split("\n").map(e => parseInt(e))
+let entry = input.filter(e => input.indexOf(2020 - e) !== -1)
+console.log(entry[0] * entry[1])
