@@ -1,7 +1,7 @@
-const fs = require("fs")
-let inputText = fs.readFileSync("./3-input.txt", "utf-8")
-
-let input = inputText.split("\n").map(e => e.split(""))
+let input = require("fs")
+  .readFileSync("./3-input.txt", "utf-8")
+  .split("\n")
+  .map(e => e.split(""))
 
 let treesHit = (right = 1, down = 1, forest = input) =>
   forest
