@@ -13,6 +13,9 @@ let seatIds = require("fs")
   )
   .map(e => e.row * 8 + e.column)
 
+// Literally check against all IDs from the lowest to the highest
+// The problem text states we are not sitting in the lowest or the highest
+// And that there is only one missing
 let highestId = Math.max(...seatIds)
 let lowestId = Math.min(...seatIds)
 let allIds = Array.from(

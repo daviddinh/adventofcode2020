@@ -4,6 +4,7 @@ let seatIds = require("fs")
   .map(e =>
     e.split("").reduce(
       (seat, f, i) => {
+        // Alternative solution is to convert to binary, but boring!
         if (f == "B") seat.row += Math.pow(2, 6 - i)
         if (f == "R") seat.column += Math.pow(2, 2 - (i % 7))
         return seat
