@@ -3,10 +3,14 @@ let declarations = require("fs")
   .split("\n\n")
   .reduce((sum, e) => {
     let yesses = []
-    e.split("\n").map(f => f.split("").map(g => { if (yesses.indexOf(g) === -1) yesses.push(g) }
-    ))
-    sum += yesses.length
-    return sum
+    e.split("\n")
+      .join("")
+      .split("")
+      .map(f => {
+        if (yesses.indexOf(f) === -1) yesses.push(f)
+      })
+
+    return (sum += yesses.length)
   }, 0)
 
 console.log(declarations)
