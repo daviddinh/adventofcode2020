@@ -6,7 +6,6 @@ let rules = require("fs")
   .map(rule => rule.match(regex))
   .map(rule => rule.map(bag => {
     let bagSplit = bag.split(" ")
-    // Some have numbers at the start, some dont
     bagSplit.length == 3 ?
     baggie = bagSplit.splice(0,2).join(" ") : 
     baggie = bagSplit.splice(1,2).join(" ")
