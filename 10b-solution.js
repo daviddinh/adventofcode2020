@@ -41,3 +41,5 @@ console.log(
     Math.pow(4, differenceCounts[3]) *
     Math.pow(7, differenceCounts[4])
 )
+
+// After completing it it turns out these are actually the tribonacci sequence.
