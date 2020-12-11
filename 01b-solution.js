@@ -1,5 +1,5 @@
 const fs = require("fs")
-let inputText = fs.readFileSync("./1-input.txt", "utf-8")
+let inputText = fs.readFileSync("./01-input.txt", "utf-8")
 let input = inputText.split("\n").map(e => parseInt(e))
 console.time();
 // Extract the previous solution into a function so that we can re-apply it

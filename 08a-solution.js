@@ -1,5 +1,5 @@
 let instructions = require("fs")
-  .readFileSync("./8-input.txt", "utf-8")
+  .readFileSync("./08-input.txt", "utf-8")
   .split("\n");
 
 let accumulator = 0;

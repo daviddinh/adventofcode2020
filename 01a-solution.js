@@ -1,5 +1,5 @@
 const fs = require("fs")
-let inputText = fs.readFileSync("./1-input.txt", "utf-8")
+let inputText = fs.readFileSync("./01-input.txt", "utf-8")
 let input = inputText.split("\n").map(e => parseInt(e))
 
 // Rather than pairwise loops, we know that (2020 - e) will give us the value of the other key

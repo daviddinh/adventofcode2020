@@ -2,7 +2,7 @@ const requiredFields = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
 const validEyeColors = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
 
 let validPassports = require("fs")
-  .readFileSync("./4-input.txt", "utf-8")
+  .readFileSync("./04-input.txt", "utf-8")
   .split("\n\n")
   .map(e => e.split("\n").join(" ").split(" "))
   .map(e =>

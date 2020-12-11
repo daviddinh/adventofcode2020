@@ -1,5 +1,5 @@
 const fs = require("fs")
-let inputText = fs.readFileSync("./9-input.txt", "utf-8")
+let inputText = fs.readFileSync("./09-input.txt", "utf-8")
 let input = inputText.split("\n").map(e => parseInt(e))
 
 // From Solution 1

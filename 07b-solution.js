@@ -1,7 +1,7 @@
 const regex = /(\d?\s?\w+ \w+) bag/gm
 
 let rules = require("fs")
-  .readFileSync("./7-input.txt", "utf-8")
+  .readFileSync("./07-input.txt", "utf-8")
   .split("\n")
   .map(rule => rule.match(regex))
   .map(rule =>

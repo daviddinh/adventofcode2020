@@ -1,5 +1,5 @@
 let seatIds = require("fs")
-  .readFileSync("./5-input.txt", "utf-8")
+  .readFileSync("./05-input.txt", "utf-8")
   .split("\n")
   .map(e =>
     e.split("").reduce(

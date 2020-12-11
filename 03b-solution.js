@@ -1,5 +1,5 @@
 let input = require("fs")
-  .readFileSync("./3-input.txt", "utf-8")
+  .readFileSync("./03-input.txt", "utf-8")
   .split("\n")
   .map(e => e.split(""))
 
