@@ -36,18 +36,24 @@ let writeValueToMemory = (index, value) => {
   let addresses = Array.from({length: Math.pow(xCount, 2)}, (_, i) => {
       let n = (i >>> 0).toString(2).split('')
       // Get the longest one and pad!
+      while (n.length <  (Math.pow(xCount, 2) >>> 0).toString(2).length - 1) {
+          n.unshift('0')
+      }
+      return n
   })
   console.log(addresses)
   addresses.map(e => {
     let counter = 0
-    let newAddress = newValue.slice().map(e => {
-        if(e == 'X') {
+    let newAddress = newValue.slice().map(f => {
+        let newValue = f
+        if(f == 'X') {
+            newValue = e[counter]
             counter++
-            return e[counter - 1]
         }
-        return e
+        return newValue
     })
-    newAddress = newAddress.parseInt(2)
+    // console.log('newAdressBefore', newAddress)
+    newAddress = parseInt(newAddress.join(''), 2)
     console.log(newAddress)
     mem[newAddress] = newAddress
   })
@@ -62,4 +68,6 @@ input.map(instruction => {
   }
 });
 
+
+console.log(mem.filter(e=>e))
 console.log(mem.filter(e => e).reduce((sum, e) => sum + e, 0));
