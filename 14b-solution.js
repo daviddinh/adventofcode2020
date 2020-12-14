@@ -1,32 +1,33 @@
 console.time("1");
-let input = require("fs").readFileSync("./14-testinput.txt", "utf-8").split("\n");
-// console.log(input);
+let input = require("fs")
+  .readFileSync("./14-input.txt", "utf-8")
+  .split("\n");
 
 let currentMask = "";
-let mem = [];
+let memory = new Map();
 
 let writeValueToMemory = (index, value) => {
   // Flip the currentMask
   let flippedMask = currentMask.split("").reverse();
   let binary = (index >>> 0).toString(2);
   let flippedBinary = binary.split("").reverse();
+
   let newValue = flippedMask
     .map((e, i) => {
-      if (e == "X") {
-        return "X";
+      if (e == 1) {
+        return 1;
       }
-      if (e == "1") {
-        return "1";
-      }
-      if (e == "0") {
-        if (flippedBinary[i] == "1") {
-          return flippedBinary[i];
+      if (e == 0) {
+        if (flippedBinary[i] == 1) {
+          return 1;
         } else {
-          return "0";
+          return 0;
         }
       }
+      return "X";
     })
     .reverse();
+
   let xCount = newValue.join("").match(/X/gm).length;
 
   let addresses = Array.from({ length: Math.pow(2, xCount) }, (_, i) => {
@@ -38,23 +39,22 @@ let writeValueToMemory = (index, value) => {
     return n;
   });
 
-  addresses.map((e) => {
+  addresses.map(e => {
     let counter = 0;
-    let newAddress = newValue.slice().map((f) => {
-      let newValue = f;
+    let newAddress = newValue.slice().map(f => {
+      let tempV = f;
       if (f == "X") {
-        newValue = e[counter];
-        counter++;
+        tempV = e[counter++];
       }
-      return newValue;
+      return tempV;
     });
     newAddress = newAddress.join("");
     decimalAddress = parseInt(newAddress, 2);
-    mem[decimalAddress] = value;
+    memory.set(decimalAddress, value);
   });
 };
 
-input.map((instruction) => {
+input.map(instruction => {
   if (instruction.indexOf("mask") !== -1) {
     currentMask = instruction.split(" = ")[1];
   } else {
@@ -62,6 +62,11 @@ input.map((instruction) => {
     writeValueToMemory(parseInt(numbers[0]), parseInt(numbers[1]));
   }
 });
-console.log(mem.filter(e => e))
-console.log(mem.filter((e) => e).reduce((sum, e) => sum + e, 0));
+
+let sum = 0;
+memory.forEach(v => {
+  sum += v;
+});
+
+console.log(sum);
 console.timeEnd("1");
