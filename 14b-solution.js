@@ -1,8 +1,6 @@
-let input = require("fs")
-  .readFileSync("./14-testinput.txt", "utf-8")
-  .split("\n");
-
-console.log(input);
+console.time("1");
+let input = require("fs").readFileSync("./14-testinput.txt", "utf-8").split("\n");
+// console.log(input);
 
 let currentMask = "";
 let mem = [];
@@ -10,56 +8,53 @@ let mem = [];
 let writeValueToMemory = (index, value) => {
   // Flip the currentMask
   let flippedMask = currentMask.split("").reverse();
-  let binary = (value >>> 0).toString(2);
+  let binary = (index >>> 0).toString(2);
   let flippedBinary = binary.split("").reverse();
   let newValue = flippedMask
     .map((e, i) => {
-      if (e == 'X') {
-          return 'X'
+      if (e == "X") {
+        return "X";
       }
-      if (e == '1') {
-          return 1;
+      if (e == "1") {
+        return "1";
       }
-      if (e == '0') {
-        if (flippedBinary[i] !== undefined) {
-            return flippedBinary[i];
+      if (e == "0") {
+        if (flippedBinary[i] == "1") {
+          return flippedBinary[i];
         } else {
-            return 0;
+          return "0";
         }
       }
     })
     .reverse();
-  console.log(newValue.join(''))
-  // Based on the new Value we look for the 'X's and replace, because they are floating
-  let xCount = newValue.join('').match(/X/gm).length
-  console.log(xCount)
-  let addresses = Array.from({length: Math.pow(xCount, 2)}, (_, i) => {
-      let n = (i >>> 0).toString(2).split('')
-      // Get the longest one and pad!
-      while (n.length <  (Math.pow(xCount, 2) >>> 0).toString(2).length - 1) {
-          n.unshift('0')
+  let xCount = newValue.join("").match(/X/gm).length;
+
+  let addresses = Array.from({ length: Math.pow(2, xCount) }, (_, i) => {
+    let n = (i >>> 0).toString(2).split("");
+    // Get the longest one and pad!
+    while (n.length < (Math.pow(2, xCount) >>> 0).toString(2).length - 1) {
+      n.unshift("0");
+    }
+    return n;
+  });
+
+  addresses.map((e) => {
+    let counter = 0;
+    let newAddress = newValue.slice().map((f) => {
+      let newValue = f;
+      if (f == "X") {
+        newValue = e[counter];
+        counter++;
       }
-      return n
-  })
-  console.log(addresses)
-  addresses.map(e => {
-    let counter = 0
-    let newAddress = newValue.slice().map(f => {
-        let newValue = f
-        if(f == 'X') {
-            newValue = e[counter]
-            counter++
-        }
-        return newValue
-    })
-    // console.log('newAdressBefore', newAddress)
-    newAddress = parseInt(newAddress.join(''), 2)
-    console.log(newAddress)
-    mem[newAddress] = newAddress
-  })
+      return newValue;
+    });
+    newAddress = newAddress.join("");
+    decimalAddress = parseInt(newAddress, 2);
+    mem[decimalAddress] = value;
+  });
 };
 
-input.map(instruction => {
+input.map((instruction) => {
   if (instruction.indexOf("mask") !== -1) {
     currentMask = instruction.split(" = ")[1];
   } else {
@@ -67,7 +62,6 @@ input.map(instruction => {
     writeValueToMemory(parseInt(numbers[0]), parseInt(numbers[1]));
   }
 });
-
-
-console.log(mem.filter(e=>e))
-console.log(mem.filter(e => e).reduce((sum, e) => sum + e, 0));
+console.log(mem.filter(e => e))
+console.log(mem.filter((e) => e).reduce((sum, e) => sum + e, 0));
+console.timeEnd("1");
