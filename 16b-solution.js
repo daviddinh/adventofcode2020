@@ -33,7 +33,8 @@ let findInvalidValues = (ticket) => {
 let validTickets = nearbyTickets.filter(
   (e) => findInvalidValues(e).length == 0
 );
-validTickets.push(myTicket);
+
+validTickets.unshift(myTicket);
 
 let checkRule = (rule, value) => {
   return (
@@ -83,46 +84,54 @@ let getCounts = (rulePossibilities) => {
 let currentCounts = getCounts(actualPossibles);
 // 9 has 3 options, lets explore those
 
-// console.log(actualPossibles);
-let count = 0
-// while (count < ) {
-while (rulePositions.indexOf(null) !== -1) {
-  let allocatedRules = [];
-  // if (actualPossibles.filter(e => e.length == 1)) break;
-  // actualPossibles.forEach((e, i) => {
-  //   if (currentCounts[e[0]] == 1) {
-  //     rulePositions[e[0]] = i;
-  //     allocatedRules.push(e[0]);
-  //     console.log(e[0])
-  //   }
-  // });
-  for (const property in currentCounts) {
-    // console.log(`${property}: ${object[property]}`);
-    if (currentCounts[property] == 1) {
-      var indexFound = parseInt(property);
-    }
-  }
+console.log(actualPossibles);
+console.log(currentCounts);
+// let count = 0;
+// while (count < 20) {
+//   // while (rulePositions.indexOf(null) !== -1) {
+//   let allocatedRules = [];
+//   // if (actualPossibles.filter(e => e.length == 1)) break;
+//   // actualPossibles.forEach((e, i) => {
+//   //   if (currentCounts[e[0]] == 1) {
+//   //     rulePositions[e[0]] = i;
+//   //     allocatedRules.push(e[0]);
+//   //     console.log(e[0])
+//   //   }
+//   // });
+//   for (const property in currentCounts) {
+//     // console.log(`${property}: ${object[property]}`);
+//     if (currentCounts[property] == 1) {
+//       var ruleFound = parseInt(property);
+//     }
+//   }
+//   console.log("ruleFound", ruleFound);
+//   let indexFound = null;
+//   actualPossibles.map((e, i, arr) => {
+//     if (e.indexOf(ruleFound) !== -1) {
+//       indexFound = i;
+//       actualPossibles.splice(i, 1);
+//     }
+//   });
 
-  ruleFound = actualPossibles.map((e,i) => {if(e.indexOf(indexFound) !== -1) return i; }).filter(e=>e)
-  rulePositions[indexFound] = ruleFound[0]
-  allocatedRules.push(indexFound)
-  // console.log('actualPossibles', actualPossibles)
-  actualPossibles.forEach((e, i) => {
-    allocatedRules.forEach((f, j) => {
-      if (e.indexOf(f) !== -1) {
-        e.splice(e.indexOf(f), 1);
-      }
-    });
-  });
-  actualPossibles.splice(ruleFound[0], 1)
-  currentCounts = getCounts(actualPossibles)
-  count++
-  console.log(rulePositions)
-}
-
+//   rulePositions[ruleFound] = indexFound;
+//   allocatedRules.push(indexFound);
+//   // console.log('actualPossibles', actualPossibles)
+//   actualPossibles.forEach((e, i) => {
+//     allocatedRules.forEach((f, j) => {
+//       if (e.indexOf(f) !== -1) {
+//         e.splice(e.indexOf(f), 1);
+//       }
+//     });
+//   });
+//   currentCounts = getCounts(actualPossibles);
+//   count++;
+//   // console.log(rulePositions);
+// }
+// console.log(actualPossibles.map((e, i) => e.indexOf(13)));
 // console.log(validTickets);
 // console.log(actualPossibles);
-//   console.dir(actualPossibles, {depth: null, colors: true, maxArrayLength: null});
+  // console.dir(actualPossibles, {depth: null, colors: true, maxArrayLength: null});
+  console.log(myTicket[8] * myTicket[17] * myTicket[15] * myTicket[2] * myTicket[19] * myTicket[6] )
 // console.dir(possibleRulePositions, {
 //   depth: null,
 //   colors: true,
@@ -131,7 +140,7 @@ while (rulePositions.indexOf(null) !== -1) {
 // console.log(possibleRulePositions);
 // console.log(Array.from(new Set(possibleRulePositions.flat())).sort((a,b) => a - b));
 // console.log(allocatedRules)
-console.log(currentCounts);
+// console.log(currentCounts);
 // console.log(rulePositions);
 
 // console.log(
